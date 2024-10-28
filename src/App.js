@@ -3,15 +3,14 @@ import axios from "axios";
 import SearchBar from "./SearchBar";
 import CurrentWeather from "./CurrentWeather";
 import Forecast from "./Forecast";
-import "./App.css"; // Import your CSS file
+import "./App.css";
 
 const WeatherApp = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
-  const [unit, setUnit] = useState("metric"); // 'metric' for Celsius, 'imperial' for Fahrenheit
-  const apiKey = "802c9c10be5f7cact2abba03f4270ao2"; // Your SheCodes API key
+  const [unit, setUnit] = useState("metric");
+  const apiKey = "802c9c10be5f7cact2abba03f4270ao2";
 
-  // Function to fetch weather data for a specific city
   const fetchWeatherData = (city) => {
     const weatherUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${unit}`;
     const forecastUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=${unit}`;
@@ -25,16 +24,13 @@ const WeatherApp = () => {
     });
   };
 
-  // Function to toggle between Celsius and Fahrenheit
   const toggleUnit = () => {
     setUnit((prevUnit) => (prevUnit === "metric" ? "imperial" : "metric"));
   };
 
-  // useEffect to fetch weather data for Johannesburg when the app loads
   useEffect(() => {
-    fetchWeatherData("Johannesburg"); // Set default city to Johannesburg
-  }, []); // Empty dependency array means this runs once when the component mounts
-
+    fetchWeatherData("Johannesburg");
+  }, []);
   return (
     <div className="WeatherApp">
       <SearchBar onSearch={fetchWeatherData} />
@@ -48,6 +44,27 @@ const WeatherApp = () => {
           {forecastData && <Forecast data={forecastData} unit={unit} />}
         </>
       )}
+      <footer>
+        <p>
+          This Project is coded by Katekani Shihundla and it is open-sourced on{" "}
+          <a
+            href="https://github.com/katekan1/shecodes-react-final-project"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>{" "}
+          and hosted on{" "}
+          <a
+            href="https://shecodes-react-git.netlify.app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Netlify
+          </a>
+          .
+        </p>
+      </footer>
     </div>
   );
 };
