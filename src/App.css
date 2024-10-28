@@ -1,38 +1,144 @@
-.App {
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.WeatherApp {
+  width: 100%;
+  max-width: 400px;
+  background-color: rgb(34, 184, 189);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Search Bar Styling */
+.SearchBar {
   display: flex;
-  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.SearchBar input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.SearchBar button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+}
+
+.SearchBar button:hover {
+  background-color: #007bff;
+}
+
+/* Current Weather Styling */
+/* Current Weather Styling */
+.CurrentWeather {
+  margin-bottom: 20px;
+  padding: 10px; /* Add padding for better spacing */
+  border-radius: 5px; /* Optional: Round the corners */
+  background-color: rgb(34, 184, 189);
+  color: black; /* Change text color to white for contrast */
+}
+
+.CurrentWeather h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.CurrentWeather div {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 10px 0;
 }
 
-.App-link {
-  color: #61dafb;
+.CurrentWeather span {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.CurrentWeather button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  color: #007bff; /* Change to a lighter color for better visibility */
+  background: none;
+  border: 1px solid #007bff; /* Border color */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.CurrentWeather button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.CurrentWeather p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+/* Additional styling for humidity, wind speed, and condition if necessary */
+.CurrentWeather .weather-info {
+  color: black;
+  background-color: #;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px 0; /* Add some margin */
+}
+
+/* Forecast Styling */
+.Forecast {
+  margin-top: 20px;
+}
+
+.Forecast h3 {
+  font-size: 1.2rem;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.forecast-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.forecast-day {
+  background-color: whitesmoke;
+  padding: 10px;
+  border-radius: 5px;
+  width: 18%;
+  text-align: center;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-day p {
+  font-size: 0.9rem;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.forecast-day img {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 5px;
 }
