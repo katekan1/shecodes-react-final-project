@@ -1,34 +1,27 @@
 import React from "react";
 
-const Forecast = ({ data, unit }) => {
-  // Function to convert temperature based on unit
-  const getTemperature = (temp) => {
-    return unit === "metric"
-      ? Math.round(temp)
-      : Math.round((temp * 9) / 5 + 32);
-  };
-
+const Forecast = ({ data }) => {
   return (
     <div className="Forecast">
+      <h3>5-Day Forecast</h3>
       <div className="forecast-grid">
-        {data.slice(0, 5).map((day, index) => (
-          <div key={index} className="forecast-day">
-            <p>
-              {new Date(day.time * 1000).toLocaleDateString("en-US", {
-                weekday: "short",
-              })}
-            </p>
+        {data.map((day, index) => (
+          <div className="forecast-day" key={index}>
+            <p>{new Date(day.time * 1000).toLocaleDateString()}</p>
             <img
-              src={
-                day.condition.icon_url ||
-                "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-day.png"
-              }
+              src={`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${day.condition.icon}`}
               alt={day.condition.description}
             />
-            <p>
-              {getTemperature(day.temperature.minimum)}° /{" "}
-              {getTemperature(day.temperature.maximum)}°
-            </p>
+            <div className="temperature">
+              <span className="min-temperature">
+                {Math.round(day.temperature.minimum)}°
+              </span>
+              /
+              <span className="max-temperature">
+                {Math.round(day.temperature.maximum)}°
+              </span>
+            </div>
+            <p>{day.condition.description}</p>
           </div>
         ))}
       </div>

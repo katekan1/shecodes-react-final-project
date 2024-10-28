@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import "./App.css"; // Ensure you have the CSS file imported
 import SearchBar from "./SearchBar";
 import CurrentWeather from "./CurrentWeather";
 import Forecast from "./Forecast";
-import "./App.css"; // Make sure to import your CSS
 
 const App = () => {
-  const [weatherData, setWeatherData] = useState(null);
-  const [forecastData, setForecastData] = useState(null);
-  const [unit, setUnit] = useState("metric"); // 'metric' for Celsius, 'imperial' for Fahrenheit
+  const [weatherData, setWeatherData] = useState({});
+  const [forecastData, setForecastData] = useState([]);
+  const [unit, setUnit] = useState("metric"); // "metric" for Celsius, "imperial" for Fahrenheit
   const apiKey = "802c9c10be5f7cact2abba03f4270ao2"; // Your SheCodes API key
+  const defaultCity = "Johannesburg";
 
   const fetchWeatherData = useCallback(
     (city) => {
@@ -35,29 +36,29 @@ const App = () => {
         });
     },
     [unit]
-  ); // Use unit as a dependency
+  );
 
-  const toggleUnit = () => {
+  useEffect(() => {
+    fetchWeatherData(defaultCity); // Fetch weather for the default city on initial load
+  }, [fetchWeatherData]);
+
+  const handleUnitChange = () => {
     setUnit((prevUnit) => (prevUnit === "metric" ? "imperial" : "metric"));
   };
 
-  useEffect(() => {
-    fetchWeatherData("Johannesburg"); // Default city data
-  }, [fetchWeatherData]); // Include fetchWeatherData as a dependency
+  const handleSearch = (city) => {
+    fetchWeatherData(city);
+  };
 
   return (
     <div className="WeatherApp">
-      <SearchBar onSearch={fetchWeatherData} />
-      {weatherData && (
-        <>
-          <CurrentWeather
-            data={weatherData}
-            onToggleUnit={toggleUnit}
-            unit={unit}
-          />
-          {forecastData && <Forecast data={forecastData} />}
-        </>
-      )}
+      <SearchBar onSearch={handleSearch} />
+      <CurrentWeather
+        data={weatherData}
+        unit={unit}
+        onUnitChange={handleUnitChange}
+      />
+      <Forecast data={forecastData} />
       <footer>
         <p>
           This Project is coded by Katekani Shihundla and it is open-sourced on
