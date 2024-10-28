@@ -70,7 +70,7 @@ const App = () => {
           </a>
           and hosted on
           <a
-            href="https://shecodes-react-git.netlify.app/"
+            href="https://shecodes-reactapp-final-project.netlify.app/"
             target="_blank"
             rel="noopener noreferrer"
           >
