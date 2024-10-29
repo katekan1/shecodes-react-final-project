@@ -100,7 +100,7 @@ const App = () => {
         <p>
           This Project is coded by Katekani Shihundla and is open-sourced on
           <a
-            href="https://github.com/katekani1/shecodes-react-final-project"
+            href="https://github.com/katekan1/shecodes-react-final-project"
             target="_blank"
             rel="noopener noreferrer"
           >
