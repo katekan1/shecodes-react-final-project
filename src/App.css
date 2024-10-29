@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding is included in element width */
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: white;
@@ -10,67 +16,87 @@ body {
 
 .WeatherApp {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px; /* Increase this value to make the box wider */
   background-color: rgb(34, 184, 189);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.WeatherContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .SearchBar {
   display: flex;
-  margin-bottom: 20px;
+  align-items: center; /* Aligns items vertically */
+  width: 100%;
+  gap: 10px; /* Space between the label and input/button */
+}
+
+.SearchLabel {
+  margin-right: 10px; /* Adds space between the label and the input */
+}
+
+.SearchBar form {
+  display: flex; /* Makes input and button stay in a row */
+  flex: 1; /* Makes the form take remaining space */
 }
 
 .SearchBar input {
-  flex: 1;
+  flex: 1; /* Allows input to fill available space */
   padding: 10px;
-  border: 1px solid grey;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .SearchBar button {
   padding: 10px;
+  border: none;
   background-color: #007bff;
   color: white;
-  border: none;
-  border-radius: 0 5px 5px 0;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: 1rem;
 }
 
-.SearchBar button:hover {
-  background-color: #007bff;
+.CurrentWeather,
+.Forecast {
+  margin-bottom: 20px;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column; /* Change to row if you want them in a line */
+  align-items: center; /* Center align the items */
+  margin-top: 10px; /* Space above the info section */
+}
+
+.weather-info p {
+  margin: 5px 0; /* Space between each info item */
+}
+
+.city-name {
+  font-size: 2rem; /* Adjust the size as needed */
+  font-weight: bold; /* Optional: makes the text bold */
+  text-align: center; /* Optional: center the text */
+  margin-bottom: 1rem; /* Optional: add some space below */
+}
+
+.CurrentWeather img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
 }
 
 .CurrentWeather {
-  margin-bottom: 20px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: rgb(34, 184, 189);
-  color: black;
-}
-
-.CurrentWeather h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.CurrentWeather div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px 0;
-}
-
-.CurrentWeather span {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-right: 10px;
+  text-align: center;
+  margin-bottom: 20px; /* Space below the current weather */
 }
 
 .CurrentWeather button {
@@ -82,67 +108,52 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  margin-bottom: 10px; /* Add space below the button */
 }
 
 .CurrentWeather button:hover {
   background-color: #007bff;
   color: #fff;
 }
-
-.CurrentWeather p {
-  font-size: 1rem;
-  margin: 5px 0;
-}
-
-.CurrentWeather .weather-info {
-  color: black;
-  background-color: rgb(34, 184, 189);
-  padding: 10px;
-  border-radius: 5px;
-  margin: 5px 0;
-}
-
 .Forecast {
-  margin-top: 20px;
-}
-
-.Forecast h3 {
-  font-size: 1.2rem;
-  color: black;
-  margin-bottom: 10px;
-}
-
-.forecast-grid {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Distributes space evenly */
+  flex-wrap: wrap; /* Allows wrapping to the next line if necessary */
+  padding: 0 10px; /* Equal padding on left and right */
+  margin-top: 20px; /* Adjust margin if necessary */
 }
 
 .forecast-day {
-  background-color: whitesmoke;
-  padding: 10px;
-  border-radius: 5px;
-  width: 18%;
+  background-color: #f0f0f0;
+  padding: 12px;
+  border-radius: 5px; /* Slightly rounded corners */
   text-align: center;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem; /* Slightly larger font */
+  flex: 1 1 calc(20% - 10px); /* Adjust width and account for margins */
+  margin: 0.5px; /* Small space around each box */
+  box-sizing: border-box; /* Includes padding and border in width */
 }
 
-.forecast-day p {
-  font-size: 0.9rem;
-  color: black;
-  margin-bottom: 5px;
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Keeps 5 columns in a row */
+  gap: 5px; /* Small space between grid items */
+  margin-top: 20px; /* Adjust margin if necessary */
 }
 
 .forecast-day img {
-  width: 30px;
-  height: 30px;
-  margin-bottom: 5px;
+  width: 50px; /* Increases icon size */
+  height: 50px;
+  margin: 6px 0;
+}
+
+.forecast-day div {
+  margin: 6px 0; /* Space between elements */
 }
 
 footer {
   text-align: center;
-  padding: 20px;
-  background-color: rgb(34, 184, 189);
-  color: #333;
+  padding-top: 10px;
   font-size: 0.9rem;
 }
 

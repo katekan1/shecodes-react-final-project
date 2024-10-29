@@ -1,69 +1,107 @@
-import React, { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import "./App.css"; // Ensure you have the CSS file imported
-import SearchBar from "./SearchBar";
+import React, { useState, useEffect } from "react";
 import CurrentWeather from "./CurrentWeather";
-import Forecast from "./Forecast";
+import "./App.css";
 
 const App = () => {
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState([]);
-  const [unit, setUnit] = useState("metric"); // "metric" for Celsius, "imperial" for Fahrenheit
-  const apiKey = "802c9c10be5f7cact2abba03f4270ao2"; // Your SheCodes API key
-  const defaultCity = "Johannesburg";
-
-  const fetchWeatherData = useCallback(
-    (city) => {
-      const weatherUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${unit}`;
-      const forecastUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=${unit}`;
-
-      axios
-        .get(weatherUrl)
-        .then((response) => {
-          setWeatherData(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching current weather data:", error);
-        });
-
-      axios
-        .get(forecastUrl)
-        .then((response) => {
-          setForecastData(response.data.daily);
-        })
-        .catch((error) => {
-          console.error("Error fetching forecast data:", error);
-        });
-    },
-    [unit]
-  );
+  const [unit, setUnit] = useState("metric");
+  const [loading, setLoading] = useState(true);
+  const [city, setCity] = useState("Johannesburg");
+  const apiKey = "802c9c10be5f7cact2abba03f4270ao2";
 
   useEffect(() => {
-    fetchWeatherData(defaultCity); // Fetch weather for the default city on initial load
-  }, [fetchWeatherData]);
+    const fetchWeatherData = async () => {
+      setLoading(true);
+      try {
+        const weatherResponse = await fetch(
+          `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${unit}`
+        );
+        const forecastResponse = await fetch(
+          `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=${unit}`
+        );
 
-  const handleUnitChange = () => {
+        if (!weatherResponse.ok || !forecastResponse.ok)
+          throw new Error("Network response was not ok");
+
+        const weather = await weatherResponse.json();
+        const forecast = await forecastResponse.json();
+
+        setWeatherData(weather);
+        setForecastData(forecast.daily.slice(0, 5)); // Get only the first 5 days
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setWeatherData(null);
+        setForecastData([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWeatherData();
+  }, [unit, city]);
+
+  const toggleUnit = () => {
     setUnit((prevUnit) => (prevUnit === "metric" ? "imperial" : "metric"));
   };
 
-  const handleSearch = (city) => {
-    fetchWeatherData(city);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const newCity = e.target.elements.city.value;
+    setCity(newCity || "Johannesburg");
   };
 
   return (
     <div className="WeatherApp">
-      <SearchBar onSearch={handleSearch} />
-      <CurrentWeather
-        data={weatherData}
-        unit={unit}
-        onUnitChange={handleUnitChange}
-      />
-      <Forecast data={forecastData} />
+      {" "}
+      {/* Added parent div */}
+      <div className="SearchBar">
+        <form onSubmit={handleSearch}>
+          <input type="text" name="city" placeholder="Search City" />
+          <button type="submit">Search</button>
+        </form>
+      </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : weatherData ? (
+        <>
+          <CurrentWeather
+            data={weatherData}
+            toggleUnit={toggleUnit}
+            unit={unit}
+          />
+          <div className="Forecast">
+            {forecastData && forecastData.length > 0 ? (
+              <div className="forecast-grid">
+                {forecastData.map((dayData, index) => (
+                  <div key={index} className="forecast-day">
+                    <div>
+                      {new Date(dayData.time * 1000).toLocaleDateString(
+                        "en-US",
+                        { weekday: "short" }
+                      )}
+                    </div>
+                    <img src={dayData.condition.icon_url} alt="weather icon" />
+                    <div>
+                      {Math.round(dayData.temperature.minimum)}° /{" "}
+                      {Math.round(dayData.temperature.maximum)}°
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div>No forecast data available.</div>
+            )}
+          </div>
+        </>
+      ) : (
+        <div>No data available.</div>
+      )}
       <footer>
         <p>
-          This Project is coded by Katekani Shihundla and it is open-sourced on
+          This Project is coded by Katekani Shihundla and is open-sourced on
           <a
-            href="https://github.com/katekani1/weather-react"
+            href="https://github.com/katekani1/shecodes-react-final-project"
             target="_blank"
             rel="noopener noreferrer"
           >
