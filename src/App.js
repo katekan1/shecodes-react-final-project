@@ -28,7 +28,7 @@ const App = () => {
         const forecast = await forecastResponse.json();
 
         setWeatherData(weather);
-        setForecastData(forecast.daily.slice(0, 5)); // Get only the first 5 days
+        setForecastData(forecast.daily.slice(0, 5));
       } catch (error) {
         console.error("Error fetching data:", error);
         setWeatherData(null);
@@ -54,7 +54,6 @@ const App = () => {
   return (
     <div className="WeatherApp">
       {" "}
-      {/* Added parent div */}
       <div className="SearchBar">
         <form onSubmit={handleSearch}>
           <input type="text" name="city" placeholder="Search City" />

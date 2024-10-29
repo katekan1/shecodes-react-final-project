@@ -6,13 +6,13 @@ const CurrentWeather = ({ data, toggleUnit, unit }) => {
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      setCurrentTime(now.toLocaleString()); // Adjust format as needed
+      setCurrentTime(now.toLocaleString());
     };
 
-    updateTime(); // Set initial time
-    const intervalId = setInterval(updateTime, 1000); // Update time every second
+    updateTime();
+    const intervalId = setInterval(updateTime, 1000);
 
-    return () => clearInterval(intervalId); // Clean up on unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   if (!data) return null;

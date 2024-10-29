@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Ensures padding is included in element width */
+  box-sizing: border-box;
 }
 
 body {
@@ -16,7 +16,7 @@ body {
 
 .WeatherApp {
   width: 100%;
-  max-width: 500px; /* Increase this value to make the box wider */
+  max-width: 500px;
   background-color: rgb(34, 184, 189);
   padding: 20px;
   border-radius: 10px;
@@ -35,22 +35,22 @@ body {
 
 .SearchBar {
   display: flex;
-  align-items: center; /* Aligns items vertically */
+  align-items: center;
   width: 100%;
-  gap: 10px; /* Space between the label and input/button */
+  gap: 10px;
 }
 
 .SearchLabel {
-  margin-right: 10px; /* Adds space between the label and the input */
+  margin-right: 10px;
 }
 
 .SearchBar form {
-  display: flex; /* Makes input and button stay in a row */
-  flex: 1; /* Makes the form take remaining space */
+  display: flex;
+  flex: 1;
 }
 
 .SearchBar input {
-  flex: 1; /* Allows input to fill available space */
+  flex: 1;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -72,20 +72,20 @@ body {
 
 .weather-info {
   display: flex;
-  flex-direction: column; /* Change to row if you want them in a line */
-  align-items: center; /* Center align the items */
-  margin-top: 10px; /* Space above the info section */
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .weather-info p {
-  margin: 5px 0; /* Space between each info item */
+  margin: 5px 0;
 }
 
 .city-name {
-  font-size: 2rem; /* Adjust the size as needed */
-  font-weight: bold; /* Optional: makes the text bold */
-  text-align: center; /* Optional: center the text */
-  margin-bottom: 1rem; /* Optional: add some space below */
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .CurrentWeather img {
@@ -96,7 +96,7 @@ body {
 
 .CurrentWeather {
   text-align: center;
-  margin-bottom: 20px; /* Space below the current weather */
+  margin-bottom: 20px;
 }
 
 .CurrentWeather button {
@@ -108,7 +108,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  margin-bottom: 10px; /* Add space below the button */
+  margin-bottom: 10px;
 }
 
 .CurrentWeather button:hover {
@@ -117,38 +117,38 @@ body {
 }
 .Forecast {
   display: flex;
-  justify-content: space-between; /* Distributes space evenly */
-  flex-wrap: wrap; /* Allows wrapping to the next line if necessary */
-  padding: 0 10px; /* Equal padding on left and right */
-  margin-top: 20px; /* Adjust margin if necessary */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 10px;
+  margin-top: 20px;
 }
 
 .forecast-day {
   background-color: #f0f0f0;
   padding: 12px;
-  border-radius: 5px; /* Slightly rounded corners */
+  border-radius: 5px;
   text-align: center;
-  font-size: 0.9rem; /* Slightly larger font */
-  flex: 1 1 calc(20% - 10px); /* Adjust width and account for margins */
-  margin: 0.5px; /* Small space around each box */
-  box-sizing: border-box; /* Includes padding and border in width */
+  font-size: 0.9rem;
+  flex: 1 1 calc(20% - 10px);
+  margin: 0.5px;
+  box-sizing: border-box;
 }
 
 .forecast-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Keeps 5 columns in a row */
-  gap: 5px; /* Small space between grid items */
-  margin-top: 20px; /* Adjust margin if necessary */
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  margin-top: 20px;
 }
 
 .forecast-day img {
-  width: 50px; /* Increases icon size */
+  width: 50px;
   height: 50px;
   margin: 6px 0;
 }
 
 .forecast-day div {
-  margin: 6px 0; /* Space between elements */
+  margin: 6px 0;
 }
 
 footer {
